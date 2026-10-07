@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Renielyn Lenon - Portfolio</title>
+
+    <style>
+:root {
+        --bg-color: #ffffff;
+        --text-color: #111111;
+        --muted-color: #666666;
+        --card-bg: #f9f9fb;
+        --border-color: #eaeaea;
+        --accent-bg: #111111;
+        --accent-text: #ffffff;
+    }
+
+        [data-theme="dark"] {
+            --bg-color: #0f0f11;
+            --text-color: #f4f4f5;
+            --muted-color: #9a9a9f;
+            --card-bg: #18181c;
+            --border-color: #2a2a30;
+            --accent-bg: #ffffff;
+            --accent-text: #0f0f11;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family:
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Helvetica,
+            Arial,
+            sans-serif;
+
+            transition:
+            background-color 0.3s ease,
+            color 0.3s ease,
+            border-color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 80px;
+        }
+
+        /* Navigation */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            font-size: 14px;
+            color: var(--muted-color);
+        }
+
+        .theme-toggle-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Hero */
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .avatar-container {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .avatar-container canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .name-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .verified-badge {
+            width: 18px;
+            height: 18px;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .social-links a {
+            color: var(--muted-color);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: var(--text-color);
+        }
+
+        .headline {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .bio {
+            font-size: 15px;
+            color: var(--muted-color);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Sections */
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            letter-spacing: -0.3px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .tech-tag {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Timeline */
+
+        .timeline-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .timeline-role {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: var(--muted-color);
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: var(--muted-color);
+            line-height: 1.5;
+        }
+
+        /* Floating Chat Widget */
+
+        .chat-widget-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent-bg);
+            color: var(--accent-text);
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .chat-box {
+            position: fixed;
+            bottom: 75px;
+            right: 20px;
+            width: 320px;
+            height: 380px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+        }
+
+        .chat-box.active {
+            display: flex;
+        }
+
+        .chat-header {
+            padding: 14px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 14px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            padding: 9px 13px;
+            border-radius: 8px;
+            max-width: 80%;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .message.received {
+            background-color: var(--border-color);
+            color: var(--text-color);
+            align-self: flex-start;
+        }
+
+        .message.sent {
+            background-color: var(--accent-bg);
+            color: var(--accent-text);
+            align-self: flex-end;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 8px 12px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 6px;
+            outline: none;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Navigation -->
+        <nav>
+            <div class="logo">
+                RBL
+            </div>
+
+            <div class="nav-right">
+
+                <ul class="nav-links">
+                    <li>About</li>
+                    <li>Journey</li>
+                    <li>Projects</li>
+                </ul>
+
+                <button class="theme-toggle-btn" id="themeToggle">
+                    Dark Mode
+                </button>
+
+            </div>
+        </nav>
+
+
+        <!-- Hero Section -->
+        <main class="hero">
+
+            <div
+                class="avatar-container"
+                id="avatarContainer"
+                title="Click to pixelate!"
+                >
+                <canvas
+                    id="avatarCanvas"
+                    width="120"
+                    height="120"
+                    ></canvas>
+            </div>
+
+
+            <div class="name-container">
+
+                <h1 class="name">
+                    Krisseah Mil
+                </h1>
+
+                <span class="verified-badge">
+                    ✓
+                </span>
+
+            </div>
+
+
+            <div class="social-links">
+
+                <a href="https://www.facebook.com/Emiko.seah#" target="_blank">
+                    Facebook
+                </a>
+
+                <span>•</span>
+
+                <a href="https://www.instagram.com/edistileee?fbclid=IwY2xjawUzkF9leHRuA2FlbQIxMABwZG9mBXNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR5NO4y3uyKwqpz_MUaU5DiEHVUnpSFjKDQoP-1gDjM-frqTTKoNoMUGZxMCDg_aem_pOiiDILUZhCuFHVIs7Evlw" target="_blank">
+                    Instagram
+                </a>
+
+                <span>•</span>
+
+                <a href="https://www.tiktok.com/@theycallmeichimikooo?lang=en" target="_blank">
+                    Tiktok
+                </a>
+
+            </div>
+
+
+            <h2 class="headline">
+                Aspiring Web Developer & Tech Enthusiast
+            </h2>
+
+
+            <p class="bio">
+                Passionate about building clean web applications,
+                exploring modern development workflows, and continuously
+                learning user-focused interactive design tools from the
+                ground up.
+
+                Roblox Kid
+            </p>
+
+        </main>
+
+
+        <!-- Tools Section -->
+        <section>
+
+            <h3 class="section-title">
+                Tools & Environment
+            </h3>
+
+            <div class="tags-container">
+
+                <span class="tech-tag">
+                    VSCODE
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- Journey Section -->
+        <section>
+
+            <h3 class="section-title">
+                Self-Learning & Journey
+            </h3>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-header">
+
+                    <span class="timeline-role">
+                        Independent Web Development Studies
+                    </span>
+
+                    <span class="timeline-date">
+                        Present
+                    </span>
+
+                </div>
+
+                <p class="timeline-desc">
+                    Dedicated to self-paced learning via documentation,
+                    online coding tutorials, and building personal
+                    practice web experiments in VSCODE.
+                </p>
+
+            </div>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-header">
+
+                    <span class="timeline-role">
+                        UI/UX Interface Prototyping
+                    </span>
+
+                    <span class="timeline-date">
+                        Continuous
+                    </span>
+
+                </div>
+
+                <p class="timeline-desc">
+                    Exploring layout structures, responsive grids,
+                    and clean design systems through hands-on
+                    frontend building.
+                </p>
+
+            </div>
+
+        </section>
+
+        <section>
+
+            <h3 class="section-title">
+                Contact
+            </h3>
+
+            <div class="timeline-card">
+
+                <div class="timeline-header">
+
+                    <span class="timeline-role">
+                        Gmail
+                    </span>
+
+                    <span class="timeline-date">
+                        Email
+                    </span>
+
+                </div>
+
+                <p class="timeline-desc">
+                    <a
+                        href="mailto:your-email@gmail.com"
+                        style="
+                        color: var(--muted-color);
+                        text-decoration: none;
+                        "
+                        >
+                        defnotmiless07@gmail.com
+                    </a>
+                </p>
+
+            </div>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-header">
+
+                    <span class="timeline-role">
+                        Contacts
+                    </span>
+
+                    <span class="timeline-date">
+                        Phone
+                    </span>
+
+                </div>
+
+                <p class="timeline-desc">
+                    <a
+                        href="tel:+631234567890"
+                        style="
+                        color: var(--muted-color);
+                        text-decoration: none;
+                        "
+                        >
+                        +63 915 982 4710
+                    </a>
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- Floating Chat Widget -->
+
+    <button
+        class="chat-widget-toggle"
+        id="chatToggle"
+        >
+        Chat with Ren
+    </button>
+
+
+    <div
+        class="chat-box"
+        id="chatBox"
+        >
+
+        <div class="chat-header">
+            <span>
+                Chat with Ren
+            </span>
+        </div>
+
+
+        <div
+            class="chat-messages"
+            id="chatMessages"
+            >
+
+            <div class="message received">
+                Hi! Feel free to ask about my learning projects or goals.
+            </div>
+
+        </div>
+
+
+        <div class="chat-input-area">
+
+            <input
+            type="text"
+            id="chatInput"
+            placeholder="Type a message..."
+            />
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* ========================================
+           Avatar Pixelation Canvas Effect
+        ======================================== */
+
+        const canvas = document.getElementById("avatarCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const images = [
+            "https://pin.it/3VJz3mwB9",
+            "Krisseah2.png"
+        ];
+
+        let currentImageIndex = 0;
+        let currentImage = new Image();
+        let isAnimating = false;
+
+        // Preload both images
+        const loadedImages = images.map((src) => {
+            const image = new Image();
+            image.crossOrigin = "anonymous";
+            image.src = src;
+            return image;
+        });
+
+        let imagesLoaded = 0;
+
+        loadedImages.forEach((image) => {
+            image.onload = () => {
+                imagesLoaded++;
+
+                if (imagesLoaded === images.length) {
+                    currentImage = loadedImages[currentImageIndex];
+                    drawImagePixelated(1);
+                }
+            };
+
+            image.onerror = () => {
+                console.error("Failed to load image:", image.src);
+            };
+        });
+
+        /* ========================================
+   Draw Pixelated Image
+======================================== */
+
+        function drawImagePixelated(pixelSize) {
+            if (!currentImage.complete || !currentImage.naturalWidth) {
+                return;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (pixelSize <= 1) {
+                ctx.imageSmoothingEnabled = true;
+
+                ctx.drawImage(
+                    currentImage,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+                return;
+            }
+
+            const w = Math.max(1, Math.floor(canvas.width / pixelSize));
+            const h = Math.max(1, Math.floor(canvas.height / pixelSize));
+
+            // Draw a smaller version
+            ctx.imageSmoothingEnabled = true;
+
+            ctx.drawImage(
+                currentImage,
+                0,
+                0,
+                w,
+                h
+            );
+
+            // Enlarge it without smoothing to create pixelation
+            ctx.imageSmoothingEnabled = false;
+
+            ctx.drawImage(
+                canvas,
+                0,
+                0,
+                w,
+                h,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+        }
+
+        /* ========================================
+   Pixelated Image Transition
+======================================== */
+
+        document
+        .getElementById("avatarContainer")
+        .addEventListener("click", () => {
+
+            // Prevent clicking repeatedly during the animation
+            if (isAnimating || imagesLoaded !== images.length) {
+                return;
+            }
+
+            isAnimating = true;
+
+            const pixelSteps = [1,
+                4,
+                8,
+                12,
+                18,
+                24];
+            let step = 0;
+
+            // Pixelate the current image
+            const pixelateOut = setInterval(() => {
+                drawImagePixelated(pixelSteps[step]);
+
+                step++;
+
+                if (step >= pixelSteps.length) {
+                    clearInterval(pixelateOut);
+
+                    // Switch to the other image
+                    currentImageIndex =
+                    (currentImageIndex + 1) % loadedImages.length;
+
+                    currentImage = loadedImages[currentImageIndex];
+
+                    // Start the new image with heavy pixelation
+                    drawImagePixelated(24);
+
+                    // Reveal the new image smoothly
+                    const revealSteps = [18,
+                        12,
+                        8,
+                        4,
+                        1];
+                    let revealStep = 0;
+
+                    const pixelateIn = setInterval(() => {
+                        drawImagePixelated(revealSteps[revealStep]);
+
+                        revealStep++;
+
+                        if (revealStep >= revealSteps.length) {
+                            clearInterval(pixelateIn);
+                            drawImagePixelated(1);
+                            isAnimating = false;
+                        }
+                    },
+                        60);
+                }
+            }, 60);
+        });
+
+
+        /* ========================================
+           Theme Toggle
+        ======================================== */
+
+        const themeToggleBtn =
+        document.getElementById("themeToggle");
+
+        themeToggleBtn.addEventListener("click", () => {
+
+            const html = document.documentElement;
+
+            const currentTheme =
+            html.getAttribute("data-theme");
+
+
+            const newTheme =
+            currentTheme === "dark"
+            ? "light": "dark";
+
+
+            html.setAttribute(
+                "data-theme",
+                newTheme
+            );
+
+
+            themeToggleBtn.textContent =
+            newTheme === "dark"
+            ? "Light Mode": "Dark Mode";
+
+
+            /* Pixel animation on theme switch */
+
+            let step = 0;
+
+            const steps = [
+                6,
+                12,
+                6,
+                1
+            ];
+
+
+            const interval = setInterval(() => {
+
+                if (step < steps.length) {
+
+                    drawImagePixelated(
+                        steps[step]
+                    );
+
+                    step++;
+
+                } else {
+
+                    clearInterval(interval);
+
+                }
+
+            },
+                50);
+
+        });
+
+
+        /* ========================================
+           Chat Widget
+        ======================================== */
+
+        const chatToggle =
+        document.getElementById("chatToggle");
+
+        const chatBox =
+        document.getElementById("chatBox");
+
+        const chatInput =
+        document.getElementById("chatInput");
+
+        const chatMessages =
+        document.getElementById("chatMessages");
+
+
+        chatToggle.addEventListener("click", () => {
+
+            chatBox.classList.toggle("active");
+
+        });
+
+
+        chatInput.addEventListener(
+            "keypress",
+            (e) => {
+
+                if (
+                    e.key === "Enter" &&
+                    chatInput.value.trim() !== ""
+                ) {
+
+                    const userMsg =
+                    document.createElement("div");
+
+
+                    userMsg.className =
+                    "message sent";
+
+
+                    userMsg.textContent =
+                    chatInput.value;
+
+
+                    chatMessages.appendChild(
+                        userMsg
+                    );
+
+
+                    chatInput.value = "";
+
+
+                    chatMessages.scrollTop =
+                    chatMessages.scrollHeight;
+
+
+                    setTimeout(() => {
+
+                        const replyMsg =
+                        document.createElement("div");
+
+
+                        replyMsg.className =
+                        "message received";
+
+
+                        replyMsg.textContent =
+                        "Thanks for your message! I'm currently practicing web development using VSCODE.";
+
+
+                        chatMessages.appendChild(
+                            replyMsg
+                        );
+
+
+                        chatMessages.scrollTop =
+                        chatMessages.scrollHeight;
+
+                    }, 800);
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
